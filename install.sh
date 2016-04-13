@@ -21,13 +21,10 @@ BASHRC="$USER_HOME/.bashrc"
 # libraries
 LIBS=( "meerkat_argument_manager"
        "meerkat_file_manager"
-       #"meerkat_io"
        "meerkat_logger"
        "meerkat_random_generator"
-       #"meerkat_vector2"
-       #"meerkat_vector3"
-       #"meerkat_network"
-       #"meerkat_network_u"
+       "meerkat_vector2"
+       "meerkat_vector3"
        #"meerkat_temporal_network"
       );
 

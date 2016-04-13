@@ -1,12 +1,12 @@
-/* meerkat argument manager
+/* meerkat file manager
  *
  * A simple class for managing file input/output processes.
  *
  * Copyright (c) 2016, Enys Mones.
  */
 
-#ifndef MEERKAT_FILE_MANAGER_H
-#define MEERKAT_FILE_MANAGER_H
+#ifndef MEERKAT_FILE_MANAGER_HPP
+#define MEERKAT_FILE_MANAGER_HPP
 
 #include "stdlib.h"
 #include "stdio.h"
@@ -120,4 +120,4 @@ public:
 
 }
 
-#endif // MEERKAT_FILE_MANAGER
+#endif // MEERKAT_FILE_MANAGERPP

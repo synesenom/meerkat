@@ -5,8 +5,8 @@
  * Copyright (c) 2016, Enys Mones.
  */
 
-#ifndef MEERKAT_ARGUMENT_MANAGER_H
-#define MEERKAT_ARGUMENT_MANAGER_H
+#ifndef MEERKAT_ARGUMENT_MANAGER_HPP
+#define MEERKAT_ARGUMENT_MANAGER_HPP
 
 #include "stdlib.h"
 #include "stdio.h"
@@ -115,30 +115,33 @@ public:
      * @param argName_  Argument reference name.
      * @return          Argument value.
      */
-    int get_int( const char *argName_ );
+    int get_int( const char *argName_ ) const;
 
     /**
      * @brief get_double  Retrieves value of double argument.
      * @param argName_    Argument reference name.
      * @return            Argument value.
      */
-    double get_double( const char *argName_ );
+    double get_double( const char *argName_ ) const;
 
     /**
      * @brief get_string  Retrieves value of string argument.
      * @param argName_    Argument reference name.
      * @return            Argument value.
      */
-    std::string get_string( const char *argName_ );
+    std::string get_string( const char *argName_ ) const;
 
     /**
      * @brief get_flag  Retrieves a flag argument.
      * @param argName_  Argument reference name.
      * @return          True if flag is set, false otherwise.
      */
-    bool get_flag( const char *argName_ );
+    bool get_flag( const char *argName_ ) const;
 
 private:
+    /**
+     * @brief The Argument struct  Encapsulates argument related variables.
+     */
     struct Argument {
         std::string name;
         std::string helpEntry;
@@ -197,4 +200,4 @@ private:
 };
 }
 
-#endif // MEERKAT_ARGUMENT_MANAGER_H
+#endif // MEERKAT_ARGUMENT_MANAGER_HPP

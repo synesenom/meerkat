@@ -82,7 +82,7 @@ void meerkat::mk_argument_manager::add_string( const char *name_,
 
 void meerkat::mk_argument_manager::print_help() const
 {
-    // Determine max keyword length.
+    // determine max keyword length
     int keyLength = 0;
     int maxKeyLength = 0;
     for(int i=0; i<(int)_arguments.size(); i++)
@@ -92,7 +92,7 @@ void meerkat::mk_argument_manager::print_help() const
             maxKeyLength = keyLength;
     }
 
-    // Print help menu.
+    // print help menu
     printf( "\n" );
     printf( "%s\n", _description.c_str() );
     printf( "%s\n", _usage.c_str() );
@@ -120,7 +120,7 @@ void meerkat::mk_argument_manager::read_arguments( int argc_, char **argv_ )
         exit(0);
     }
 
-    // Set arguments.
+    // Set arguments
     for(int i=0; i<argc_; i++)
     {
         for(int j=0; j<(int)_arguments.size(); j++)
@@ -140,7 +140,7 @@ void meerkat::mk_argument_manager::read_arguments( int argc_, char **argv_ )
         }
     }
 
-    // Check required arguments.
+    // Check required arguments
     int req_not_given = 0;
     for (int i=0; i<(int)_arguments.size(); i++)
     {
@@ -158,7 +158,7 @@ void meerkat::mk_argument_manager::read_arguments( int argc_, char **argv_ )
 
 void meerkat::mk_argument_manager::show_settings() const
 {
-    // Determine max name length.
+    // Determine max name length
     int nameLength = 0;
     int maxNameLength = 0;
     for (int i=0; i<(int)_arguments.size(); i++)
@@ -168,7 +168,7 @@ void meerkat::mk_argument_manager::show_settings() const
             maxNameLength = nameLength;
     }
 
-    // Print settings.
+    // Print settings
     printf( "\n" );
     printf( "Settings:\n---------\n" );
     if( (int)_arguments.size() > 0 )
@@ -188,7 +188,7 @@ void meerkat::mk_argument_manager::show_settings() const
     printf( "\n" );
 }
 
-int meerkat::mk_argument_manager::get_int( const char *argName_ )
+int meerkat::mk_argument_manager::get_int( const char *argName_ ) const
 {
     for (int i=0; i<(int)_arguments.size(); i++)
     {
@@ -211,7 +211,7 @@ int meerkat::mk_argument_manager::get_int( const char *argName_ )
     exit(0);
 }
 
-double meerkat::mk_argument_manager::get_double( const char *argName_ )
+double meerkat::mk_argument_manager::get_double( const char *argName_ ) const
 {
     for (int i=0; i<(int)_arguments.size(); i++)
     {
@@ -234,7 +234,7 @@ double meerkat::mk_argument_manager::get_double( const char *argName_ )
     exit(0);
 }
 
-std::string meerkat::mk_argument_manager::get_string( const char *argName_ )
+std::string meerkat::mk_argument_manager::get_string( const char *argName_ ) const
 {
     for (int i=0; i<(int)_arguments.size(); i++)
     {
@@ -253,7 +253,7 @@ std::string meerkat::mk_argument_manager::get_string( const char *argName_ )
     exit(0);
 }
 
-bool meerkat::mk_argument_manager::get_flag( const char *argName_ )
+bool meerkat::mk_argument_manager::get_flag( const char *argName_ ) const
 {
     for (int i=0; i<(int)_arguments.size(); i++)
     {
