@@ -55,24 +55,27 @@ public:
 
 
     /**
-     * @brief e         Prints info message.
-     * @param message_  Info message.
+     * @brief i          Prints info message.
+     * @param function_  The function that sends the message.
+     * @param message_   Info message.
      */
-    void i( const char *message_, ... ) const;
+    void i( const char *function_, const char *message_, ... ) const;
 
 
     /**
-     * @brief e         Prints warning message.
-     * @param message_  Warning message.
+     * @brief w          Prints warning message.
+     * @param function_  The function that sends the message.
+     * @param message_   Warning message.
      */
-    void w( const char *message_, ... ) const;
+    void w( const char *function_, const char *message_, ... ) const;
 
 
     /**
-     * @brief e         Prints error message.
-     * @param message_  Error message.
+     * @brief e          Prints error message.
+     * @param function_  The function that sends the message.
+     * @param message_   Error message.
      */
-    void e( const char *message_, ... ) const;
+    void e( const char *function_, const char *message_, ... ) const;
 
 private:
     std::string _tag;                     // Additional tag.

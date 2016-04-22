@@ -58,7 +58,7 @@ void meerkat::mk_argument_manager::add_double( const char *name_,
                          chValue,
                          keyLong_,
                          keyShort_,
-                         Integer,
+                         Double,
                          Value,
                          priority_ );
 }
@@ -75,7 +75,7 @@ void meerkat::mk_argument_manager::add_string( const char *name_,
                          defaultValue_.c_str(),
                          keyLong_,
                          keyShort_,
-                         Integer,
+                         String,
                          Value,
                          priority_ );
 }
@@ -202,12 +202,12 @@ int meerkat::mk_argument_manager::get_int( const char *argName_ ) const
             }
             else
             {
-                printf( "get_int_argument error: argument is not an integer (%s).\n", argName_ );
+                printf( "mk_argument_manager error: argument is not an integer (%s).\n", argName_ );
                 exit(0);
             }
         }
     }
-    printf( "get_int_argument error: no such argument (%s).\n", argName_ );
+    printf( "mk_argument_manager error: no such argument (%s).\n", argName_ );
     exit(0);
 }
 
@@ -225,12 +225,12 @@ double meerkat::mk_argument_manager::get_double( const char *argName_ ) const
             }
             else
             {
-                printf( "get_int_argument error: argument is not a double (%s).\n", argName_ );
+                printf( "mk_argument_manager error: argument is not a double (%s).\n", argName_ );
                 exit(0);
             }
         }
     }
-    printf( "get_int_argument error: no such argument (%s).\n", argName_ );
+    printf( "mk_argument_manager error: no such argument (%s).\n", argName_ );
     exit(0);
 }
 
@@ -244,12 +244,12 @@ std::string meerkat::mk_argument_manager::get_string( const char *argName_ ) con
                 return _arguments[i].value;
             else
             {
-                printf( "get_int_argument error: argument is not a string (%s).\n", argName_ );
+                printf( "mk_argument_manager error: argument is not a string (%s).\n", argName_ );
                 exit(0);
             }
         }
     }
-    printf( "get_int_argument error: no such argument (%s).\n", argName_ );
+    printf( "mk_argument_manager error: no such argument (%s).\n", argName_ );
     exit(0);
 }
 
@@ -263,12 +263,12 @@ bool meerkat::mk_argument_manager::get_flag( const char *argName_ ) const
                 return _arguments[i].value == "on";
             else
             {
-                printf( "get_int_argument error: argument is not a string (%s).\n", argName_ );
+                printf( "mk_argument_manager error: argument is not a flag (%s).\n", argName_ );
                 exit(0);
             }
         }
     }
-    printf( "get_int_argument error: no such argument (%s).\n", argName_ );
+    printf( "mk_argument_manager error: no such argument (%s).\n", argName_ );
     exit(0);
 }
 

@@ -25,7 +25,7 @@ LIBS=( "meerkat_argument_manager"
        "meerkat_random_generator"
        "meerkat_vector2"
        "meerkat_vector3"
-       #"meerkat_temporal_network"
+       "meerkat_temporal_network"
       );
 
 

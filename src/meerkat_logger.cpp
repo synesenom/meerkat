@@ -34,36 +34,36 @@ void meerkat::mk_logger::severity_level( SeverityLevel severityLevel_ )
     _severityLevel = severityLevel_;
 }
 
-void meerkat::mk_logger::i( const char *message_, ... ) const
+void meerkat::mk_logger::i( const char *function_, const char *message_, ... ) const
 {
     va_list arg;
     if( _severityLevel == Info ) {
         va_start(arg, message_);
-        printf( "INFO %s  %s: ", _get_time_str().c_str(), _tag.c_str() );
+        printf( "INFO %s  %s::%s: ", _get_time_str().c_str(), _tag.c_str(), function_ );
         vprintf(message_, arg);
         va_end(arg);
         printf("\n");
     }
 }
 
-void meerkat::mk_logger::w( const char *message_, ... ) const
+void meerkat::mk_logger::w( const char *function_, const char *message_, ... ) const
 {
     va_list arg;
     if( _severityLevel == Info ||_severityLevel == Warning ) {
         va_start(arg, message_);
-        printf( "WARN %s  %s: ", _get_time_str().c_str(), _tag.c_str());
+        printf( "WARN %s  %s::%s: ", _get_time_str().c_str(), _tag.c_str(), function_ );
         vprintf(message_, arg);
         va_end(arg);
         printf("\n");
     }
 }
 
-void meerkat::mk_logger::e( const char *message_, ... ) const
+void meerkat::mk_logger::e( const char *function_, const char *message_, ... ) const
 {
     va_list arg;
     if( _severityLevel == Info || _severityLevel == Warning || _severityLevel == Error ) {
         va_start(arg, message_);
-        printf( "ERRO %s  %s: ", _get_time_str().c_str(), _tag.c_str());
+        printf( "ERRO %s  %s::%s: ", _get_time_str().c_str(), _tag.c_str(), function_ );
         vprintf(message_, arg);
         va_end(arg);
         printf("\n");
