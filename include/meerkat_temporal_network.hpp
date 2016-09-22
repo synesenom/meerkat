@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include "limits.h"
 #include "meerkat_file_manager.hpp"
 #include "meerkat_logger.hpp"
 
@@ -158,12 +159,10 @@ public:
      * @brief create        Creates the temporal network based on a temporal edge list.
      * @param filename_     File containing the temporal edges in the following CSV structure:
      *                      node1 node2 time duration
-     * @param timeWindow_   Time window of the temporal egde list (size of a single time step).
      * @param reverseTime_  If true, network is read from the file in reversed time.
      * @return              True if network could be created from file, false otherwise.
      */
-    bool create( const std::string filename_,
-                 int timeWindow_ = 1,
+    bool create(const std::string filename_,
                  bool reverseTime_ = false );
 
     /**
@@ -171,13 +170,11 @@ public:
      * @param nodesFile_    File containing the node labels.
      * @param edgesFile_    File containing the temporal edges in the following CSV structure:
      *                      node1 node2 time duration
-     * @param timeWindow_   Time window of the temporal egde list (size of a single time step).
      * @param reverseTime_  If true, network is read from the file in reversed time.
      * @return              True if network could be created from file, false otherwise.
      */
     bool create( const std::string nodesFile_,
                  const std::string edgesFile_,
-                 int timeWindow_ = 1,
                  bool reverseTime_ = false );
 
     /**

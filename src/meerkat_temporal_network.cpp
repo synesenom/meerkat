@@ -231,7 +231,6 @@ meerkat::mk_temporal_network::~mk_temporal_network()
 }
 
 bool meerkat::mk_temporal_network::create( const std::string filename_,
-                                           int timeWindow_,
                                            bool reverseTime_ )
 {
     /// Try to open file.
@@ -259,6 +258,7 @@ bool meerkat::mk_temporal_network::create( const std::string filename_,
     sscanf( line, "%s %s %lu %lu", node1Label, node2Label, &edgeTime, &edgeDuration );
     unsigned long startTimestamp = edgeTime;
     unsigned long endTimestamp = edgeTime;
+    unsigned long timeWindow = ULONG_MAX;
     lines[0] = std::string( line );
     // Read rest of the rows
     for( int r=1; r<rows; r++ )
@@ -272,13 +272,17 @@ bool meerkat::mk_temporal_network::create( const std::string filename_,
             startTimestamp = edgeTime;
         if( edgeTime + edgeDuration > endTimestamp )
             endTimestamp = edgeTime + edgeDuration;
+        if( edgeDuration < timeWindow )
+            timeWindow = edgeDuration;
     }
+
     // Calculate number of time steps
-    _maxTime = int((endTimestamp - startTimestamp) / (unsigned long)timeWindow_);
+    _maxTime = int((endTimestamp - startTimestamp) / (unsigned long)timeWindow);
     if( _maxTime == 0 )
         _maxTime = 1;
     _log.i( "create", "start time:        %lu", startTimestamp );
     _log.i( "create", "end time:          %lu", endTimestamp );
+    _log.i( "create", "time window:       %lu", timeWindow );
     _log.i( "create", "max time index:    %i", _maxTime );
 
     /// Add nodes
@@ -303,8 +307,8 @@ bool meerkat::mk_temporal_network::create( const std::string filename_,
                 node1Label, node2Label, &edgeTime, &edgeDuration );
         node1Id = node_id( node1Label );
         node2Id = node_id( node2Label );
-        timeIdx = int((edgeTime-startTimestamp) / (unsigned long)timeWindow_);
-        timeDur = int(edgeDuration / (unsigned long)timeWindow_);
+        timeIdx = int((edgeTime-startTimestamp) / (unsigned long)timeWindow);
+        timeDur = int(edgeDuration / (unsigned long)timeWindow);
         if( timeDur == 0 )
             timeDur = 1;
 
@@ -339,9 +343,8 @@ bool meerkat::mk_temporal_network::create( const std::string filename_,
     return true;
 }
 
-bool meerkat::mk_temporal_network::create( const std::string nodesFile_,
+bool meerkat::mk_temporal_network::create(const std::string nodesFile_,
                                            const std::string edgesFile_,
-                                           int timeWindow_,
                                            bool reverseTime_ )
 {
     /// Check if nodes file exists
@@ -384,6 +387,7 @@ bool meerkat::mk_temporal_network::create( const std::string nodesFile_,
     sscanf( line, "%s %s %lu %lu", node1Label, node2Label, &edgeTime, &edgeDuration );
     unsigned long startTimestamp = edgeTime;
     unsigned long endTimestamp = edgeTime;
+    unsigned long timeWindow = ULONG_MAX;
     lines[0] = std::string( line );
     // Read rest of the rows
     for( int r=1; r<rows; r++ )
@@ -397,11 +401,14 @@ bool meerkat::mk_temporal_network::create( const std::string nodesFile_,
             startTimestamp = edgeTime;
         if( edgeTime + edgeDuration > endTimestamp )
             endTimestamp = edgeTime + edgeDuration;
+        if( edgeDuration < timeWindow )
+            timeWindow = edgeDuration;
     }
     // Calculate number of time steps
-    _maxTime = int((endTimestamp - startTimestamp) / (unsigned long)timeWindow_);
+    _maxTime = int((endTimestamp - startTimestamp) / (unsigned long)timeWindow);
     _log.i( "create", "start time:        %lu", startTimestamp );
     _log.i( "create", "end time:          %lu", endTimestamp );
+    _log.i( "create", "time window:       %lu", timeWindow );
     _log.i( "create", "max time index:    %i", _maxTime );
 
     /// Read in activity patterns
@@ -416,8 +423,8 @@ bool meerkat::mk_temporal_network::create( const std::string nodesFile_,
                 node1Label, node2Label, &edgeTime, &edgeDuration );
         node1Id = node_id( node1Label );
         node2Id = node_id( node2Label );
-        timeIdx = int((edgeTime-startTimestamp) / (unsigned long)timeWindow_);
-        timeDur = int(edgeDuration / (unsigned long)timeWindow_);
+        timeIdx = int((edgeTime-startTimestamp) / (unsigned long)timeWindow);
+        timeDur = int(edgeDuration / (unsigned long)timeWindow);
 
         // Reverse if it is enabled
         if( reverseTime_ )
