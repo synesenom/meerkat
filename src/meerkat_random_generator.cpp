@@ -4,7 +4,8 @@
 meerkat::mk_random_generator::mk_random_generator()
 {
     _a._isTableSet = false;
-    init( rand()%1000 );
+    srand( time(NULL) );
+    init( rand()%10000 );
 }
 
 meerkat::mk_random_generator::mk_random_generator( int seed_ )

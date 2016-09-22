@@ -277,9 +277,10 @@ bool meerkat::mk_temporal_network::create( const std::string filename_,
     }
 
     // Calculate number of time steps
-    _maxTime = int((endTimestamp - startTimestamp) / (unsigned long)timeWindow);
+    _maxTime = int((endTimestamp - startTimestamp) / timeWindow);
     if( _maxTime == 0 )
         _maxTime = 1;
+    _timeWindow = (int)timeWindow;
     _log.i( "create", "start time:        %lu", startTimestamp );
     _log.i( "create", "end time:          %lu", endTimestamp );
     _log.i( "create", "time window:       %lu", timeWindow );
@@ -307,8 +308,8 @@ bool meerkat::mk_temporal_network::create( const std::string filename_,
                 node1Label, node2Label, &edgeTime, &edgeDuration );
         node1Id = node_id( node1Label );
         node2Id = node_id( node2Label );
-        timeIdx = int((edgeTime-startTimestamp) / (unsigned long)timeWindow);
-        timeDur = int(edgeDuration / (unsigned long)timeWindow);
+        timeIdx = int((edgeTime-startTimestamp) / timeWindow);
+        timeDur = int(edgeDuration / timeWindow);
         if( timeDur == 0 )
             timeDur = 1;
 
@@ -405,7 +406,10 @@ bool meerkat::mk_temporal_network::create(const std::string nodesFile_,
             timeWindow = edgeDuration;
     }
     // Calculate number of time steps
-    _maxTime = int((endTimestamp - startTimestamp) / (unsigned long)timeWindow);
+    _maxTime = int((endTimestamp - startTimestamp) / timeWindow);
+    if( _maxTime == 0 )
+        _maxTime = 1;
+    _timeWindow = (int)timeWindow;
     _log.i( "create", "start time:        %lu", startTimestamp );
     _log.i( "create", "end time:          %lu", endTimestamp );
     _log.i( "create", "time window:       %lu", timeWindow );
@@ -423,8 +427,8 @@ bool meerkat::mk_temporal_network::create(const std::string nodesFile_,
                 node1Label, node2Label, &edgeTime, &edgeDuration );
         node1Id = node_id( node1Label );
         node2Id = node_id( node2Label );
-        timeIdx = int((edgeTime-startTimestamp) / (unsigned long)timeWindow);
-        timeDur = int(edgeDuration / (unsigned long)timeWindow);
+        timeIdx = int((edgeTime-startTimestamp) / timeWindow);
+        timeDur = int(edgeDuration / timeWindow);
 
         // Reverse if it is enabled
         if( reverseTime_ )
@@ -584,6 +588,11 @@ int meerkat::mk_temporal_network::maxTime() const
     return _maxTime;
 }
 
+int meerkat::mk_temporal_network::time_window() const
+{
+    return _timeWindow;
+}
+
 int meerkat::mk_temporal_network::order() const
 {
     return (int)_nodes.size();
@@ -595,6 +604,11 @@ int meerkat::mk_temporal_network::size() const
     for( int i=0; i<o; i++ )
         s += degree(i);
     return s / 2;
+}
+
+double meerkat::mk_temporal_network::k() const
+{
+    return 2.0 * (double)size_temporal() / ((double)_maxTime * (double)_nodes.size());
 }
 
 int meerkat::mk_temporal_network::size_temporal() const

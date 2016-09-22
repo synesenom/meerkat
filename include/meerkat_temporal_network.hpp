@@ -98,6 +98,7 @@ private:
     std::map<std::string, int> _labelsHash;     // Mapping from label to id in the node vector.
     int _currentTime;                           // Current time index.
     int _maxTime;                               // Maximum time index.
+    int _timeWindow;                            // Time window (size of a single step).
     mk_logger _log;                             // Internal logger class for log messages.
 
 
@@ -258,6 +259,12 @@ public:
     int maxTime() const;
 
     /**
+     * @brief time_window  Returns the window size.
+     * @return             Time window size.
+     */
+    int time_window() const;
+
+    /**
      * @brief order  Returns the number of nodes.
      * @return       Numnber of nodes.
      */
@@ -268,6 +275,12 @@ public:
      * @return      Number of all possible edges.
      */
     int size() const;
+
+    /**
+     * @brief k  Returns the temporal average degree.
+     * @return   Temporal average degree.
+     */
+    double k() const;
 
 
     /**
