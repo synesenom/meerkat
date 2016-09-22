@@ -98,14 +98,25 @@ void meerkat::mk_argument_manager::print_help() const
     printf( "%s\n", _usage.c_str() );
     if( (int)_arguments.size() > 0 )
     {
-        printf( "Options:\n" );
+        printf( "options:\n" );
         for(int i=0; i<(int)_arguments.size(); i++)
         {
-            keyLength = (int)_arguments[i].keyLong.length() + (int)_arguments[i].keyShort.length();
+            // print keys
+            keyLength = (int)_arguments[i].keyLong.length() + (int)_arguments[i].keyShort.length()+3;
             printf( "  %s,%s", _arguments[i].keyLong.c_str(), _arguments[i].keyShort.c_str() );
-            for(int j=0; j<maxKeyLength-keyLength; j++)
-                printf( " " );
-            printf( "%s\n", _arguments[i].helpEntry.c_str() );
+
+            // print description
+            char ch[1024] = {""};
+            sprintf(ch, "%s\n", _arguments[i].helpEntry.c_str());
+            char *pch = strtok(ch, "\n");
+            while( pch != NULL )
+            {
+                for(int j=0; j<maxKeyLength-keyLength+3; j++)
+                    printf( " " );
+                printf( "%s\n", pch );
+                keyLength = 0;
+                pch = strtok(NULL, "\n");
+            }
         }
     }
     printf( "\n" );
